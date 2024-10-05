@@ -28,7 +28,6 @@ func _ready() -> void:
 	CoalSpriteAnim2D = $"CollisionShape2D/CoalSprite"
 	CollShape2D = $"CollisionShape2D"
 	CoalSpriteAnim2D.play()
-	print ("hello world")
 	pass # Replace with function body.
 
 
@@ -38,16 +37,17 @@ func _physics_process(delta: float) -> void:
 	var velocity
 	#walk mode by default
 	if(walking):
+		
 		rotation = 0
 		angular_velocity = 0
 		if Input.is_action_just_pressed("Space"):
 			linear_velocity  = (Vector2.RIGHT*multiplier*3.0)+(Vector2.UP*multiplier*3.0)
 			walking = false
 			projectile = true
+			CoalSpriteAnim2D.animation = &"falling"
 			rotation = 0
 			angular_velocity = 0
 		elif(grounded):
-			
 			#walking code
 			if((position.x < spawnPoint.x - leftDistance and !toggleDirection) or (position.x > spawnPoint.x + rightDistance and toggleDirection)):
 				toggleDirection = !toggleDirection
@@ -58,8 +58,6 @@ func _physics_process(delta: float) -> void:
 				velocity = Vector2.RIGHT * multiplier 
 				CoalSpriteAnim2D.flip_h = true
 			linear_velocity = velocity
-			print("CODE RUNNING ",position,velocity)
-			
 	#could also act as a projectile
 	elif(projectile):
 		lock_rotation = false
@@ -67,6 +65,7 @@ func _physics_process(delta: float) -> void:
 		if(closeNuff(angular_velocity,0,0.2) and grounded):
 			walking = true
 			projectile = false
+			CoalSpriteAnim2D.  animation = &"walking"
 			linear_velocity = Vector2.UP*multiplier*2   
 			lock_rotation = true
 			rotation = 0
@@ -76,25 +75,14 @@ func _physics_process(delta: float) -> void:
 		pass
 	
 	
-	print(linear_velocity," ",angular_velocity," ",rotation," ",walking," ",projectile)
+	if(position.y > spawnPoint.y + 300 ):
+		position = spawnPoint
 	
 	
 	
 	
 	
 	
-	"""
-	match animationIndex:
-		0:
-			
-		_:
-			pass
 	
-	
-	
-	
-	
-	position += velocity
-	"""
 	
 	pass

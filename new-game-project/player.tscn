@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://duhntt1tgj1nt"]
+
+[ext_resource type="Script" path="res://player_rb_2d.gd" id="1_ira0o"]
+[ext_resource type="Texture2D" uid="uid://cwy0wp3068tcm" path="res://Assets/Images/Animations/Witch/Witch.png" id="2_k6hu6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvhwq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k6hu6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Player" type="Node2D"]
+
+[node name="PlayerRB2D" type="RigidBody2D" parent="."]
+scale = Vector2(0.534247, 0.534247)
+script = ExtResource("1_ira0o")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerRB2D"]
+position = Vector2(59.53, 0)
+polygon = PackedVector2Array(-19.1093, -18.718, -26.5964, -56.1539, -26.5964, -86.1025, 1.48047, -91.718, 12.7113, -127.282, -17.2374, -144.128, -35.9553, -211.513, -71.5194, -215.256, -88.3656, -144.128, -135.16, -134.769, -137.032, -104.82, -110.827, -86.1025, -95.8528, -58.0256, -120.186, -33.6923, -108.955, 123.538, -43.4425, 125.41, -43.4425, 194.666, 38.9164, 192.795, 37.0446, 166.59, 31.4292, 166.59, 29.5574, 61.7691, -28.4681, 61.7691, -28.4681, 48.6666, 3.35229, 48.6666, 1.48047, 28.0768, -22.8528, 28.0768, -17.2374, 16.8461)
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerRB2D/CollisionPolygon2D"]
+position = Vector2(-55.445, 0)
+scale = Vector2(0.806464, 0.806464)
+sprite_frames = SubResource("SpriteFrames_wvhwq")
+
+[node name="Camera2D" type="Camera2D" parent="PlayerRB2D"]
+position = Vector2(-332, -283)
+offset = Vector2(640, 360)

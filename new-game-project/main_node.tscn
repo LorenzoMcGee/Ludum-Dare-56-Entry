@@ -62,7 +62,7 @@ metadata/_edit_lock_ = true
 offset = Vector2(576, 324)
 
 [node name="TinyCreatures" parent="." instance=ExtResource("4_gki8k")]
-position = Vector2(-6, -127)
+position = Vector2(-1007, -12)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

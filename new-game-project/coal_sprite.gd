@@ -13,6 +13,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	#if Input.is_action_pressed("Space"):
+		#position  += (Vector2.RIGHT*multiplier*delta)+(Vector2.UP*multiplier*delta)
+	
+	
+	
+	"""
 	match animationIndex:
 		0:
 			if(position.x < 200 or position.x > 1057):
@@ -31,6 +38,6 @@ func _process(delta: float) -> void:
 	
 	
 	position += velocity
-	
+	"""
 	
 	pass

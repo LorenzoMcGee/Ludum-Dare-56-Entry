@@ -5,11 +5,19 @@ var spawnPoint
 
 var rightDistance
 var leftDistance
+var grabbed = false
 
 var walking = true
 var CoalSpriteAnim2D
 var CollShape2D
 var toggleDirection = false
+var Eprompt
+
+var playerPos
+var grabbable = false
+var negator = 1
+
+
 
 func closeNuff(inp,comp,threshold):
 	return abs(inp-comp) < threshold
@@ -27,54 +35,72 @@ func _ready() -> void:
 	spawnPoint = position
 	CoalSpriteAnim2D = $"CollisionShape2D/CoalSprite"
 	CollShape2D = $"CollisionShape2D"
+	Eprompt = $"EPrompt"
 	CoalSpriteAnim2D.play()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	#check if grounded
 	var grounded = closeNuff(linear_velocity.y,0,0.05)
+	#check if grabbable
+	grabbable = Eprompt.visible
+	
 	var velocity
-	#walk mode by default
-	if(walking):
+	
+	if(grabbable && Input.is_action_just_pressed("EKey")):
+		grabbed = true
+		playerPos = Vector2.ZERO
+		CoalSpriteAnim2D.animation = &"falling"
 		
+	if(Input.is_action_just_pressed("LeftArrow")):
+		negator = -1
+	elif(Input.is_action_just_pressed("RightArrow")):
+		negator = 1
+		
+	if(!grabbable and !grabbed):
 		rotation = 0
 		angular_velocity = 0
-		if Input.is_action_just_pressed("Space"):
-			linear_velocity  = (Vector2.RIGHT*multiplier*3.0)+(Vector2.UP*multiplier*3.0)
-			walking = false
-			projectile = true
-			CoalSpriteAnim2D.animation = &"falling"
+	
+	
+	if(!grabbed):
+		#walk mode by default
+		if(walking):
 			rotation = 0
 			angular_velocity = 0
-		elif(grounded):
-			#walking code
-			if((position.x < spawnPoint.x - leftDistance and !toggleDirection) or (position.x > spawnPoint.x + rightDistance and toggleDirection)):
-				toggleDirection = !toggleDirection
-			if(!toggleDirection):
-				velocity = Vector2.LEFT * multiplier 
-				CoalSpriteAnim2D.flip_h = false
-			else:
-				velocity = Vector2.RIGHT * multiplier 
-				CoalSpriteAnim2D.flip_h = true
-			linear_velocity = velocity
-	#could also act as a projectile
-	elif(projectile):
-		lock_rotation = false
-		#need to detect if the coalSprite is on the ground
-		if(closeNuff(angular_velocity,0,0.2) and grounded):
-			walking = true
-			projectile = false
-			CoalSpriteAnim2D.  animation = &"walking"
-			linear_velocity = Vector2.UP*multiplier*2   
-			lock_rotation = true
-			rotation = 0
-			angular_velocity = 0
+			if(grounded):
+				#walking code
+				if((position.x < spawnPoint.x - leftDistance and !toggleDirection) or (position.x > spawnPoint.x + rightDistance and toggleDirection)):
+					toggleDirection = !toggleDirection
+				if(!toggleDirection):
+					velocity = Vector2.LEFT * multiplier 
+					CoalSpriteAnim2D.flip_h = false
+				else:
+					velocity = Vector2.RIGHT * multiplier 
+					CoalSpriteAnim2D.flip_h = true
+				linear_velocity = velocity
+		#could also act as a projectile
+		elif(projectile):
+			lock_rotation = false
+			#need to detect if the coalSprite is on the ground
+			if(closeNuff(angular_velocity,0,0.2) and grounded):
+				walking = true
+				projectile = false
+				CoalSpriteAnim2D.  animation = &"walking"
+				linear_velocity = Vector2.UP*multiplier*2   
+				lock_rotation = true
+				rotation = 0
+				angular_velocity = 0
 			
 	else:
-		pass
+		global_position = playerPos
+				
+		
+			
+		
 	
-	
+	#checks if it falls out of the world
 	if(position.y > spawnPoint.y + 300 ):
 		position = spawnPoint
 	

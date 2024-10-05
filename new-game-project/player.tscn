@@ -1,20 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://duhntt1tgj1nt"]
+[gd_scene load_steps=10 format=3 uid="uid://duhntt1tgj1nt"]
 
+[ext_resource type="Script" path="res://player.gd" id="1_367ld"]
 [ext_resource type="Script" path="res://player_rb_2d.gd" id="1_ira0o"]
-[ext_resource type="Texture2D" uid="uid://cwy0wp3068tcm" path="res://Assets/Images/Animations/Witch/Witch.png" id="2_k6hu6"]
+[ext_resource type="Script" path="res://object_detector.gd" id="3_6t0at"]
+[ext_resource type="Texture2D" uid="uid://cwqr1eavy3u83" path="res://Assets/Images/Animations/Witch/Witch1.png" id="3_y6o5b"]
+[ext_resource type="Texture2D" uid="uid://bpkxig7vbqylt" path="res://Assets/Images/Animations/Witch/Witch2.png" id="4_g1da3"]
+[ext_resource type="Texture2D" uid="uid://dn6xjd6ukaohl" path="res://Assets/Images/Animations/Witch/Witch3.png" id="5_ewy0l"]
+[ext_resource type="Texture2D" uid="uid://c6n4bivdafkw0" path="res://Assets/Images/Animations/Witch/Witch4.png" id="6_vc62k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wvhwq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_k6hu6")
+"texture": ExtResource("3_y6o5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g1da3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ewy0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vc62k")
 }],
 "loop": true,
 "name": &"default",
 "speed": 4.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_liow6"]
+radius = 201.04
+
 [node name="Player" type="Node2D"]
+script = ExtResource("1_367ld")
 
 [node name="PlayerRB2D" type="RigidBody2D" parent="."]
 scale = Vector2(0.534247, 0.534247)
@@ -25,10 +43,18 @@ position = Vector2(59.53, 0)
 polygon = PackedVector2Array(-19.1093, -18.718, -26.5964, -56.1539, -26.5964, -86.1025, 1.48047, -91.718, 12.7113, -127.282, -17.2374, -144.128, -35.9553, -211.513, -71.5194, -215.256, -88.3656, -144.128, -135.16, -134.769, -137.032, -104.82, -110.827, -86.1025, -95.8528, -58.0256, -120.186, -33.6923, -108.955, 123.538, -43.4425, 125.41, -43.4425, 194.666, 38.9164, 192.795, 37.0446, 166.59, 31.4292, 166.59, 29.5574, 61.7691, -28.4681, 61.7691, -28.4681, 48.6666, 3.35229, 48.6666, 1.48047, 28.0768, -22.8528, 28.0768, -17.2374, 16.8461)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerRB2D/CollisionPolygon2D"]
-position = Vector2(-55.445, 0)
+position = Vector2(-47.455, -13.045)
 scale = Vector2(0.806464, 0.806464)
 sprite_frames = SubResource("SpriteFrames_wvhwq")
+frame_progress = 0.942444
 
 [node name="Camera2D" type="Camera2D" parent="PlayerRB2D"]
 position = Vector2(-332, -283)
 offset = Vector2(640, 360)
+
+[node name="ObjectArea" type="Area2D" parent="."]
+script = ExtResource("3_6t0at")
+
+[node name="ObjectDetector" type="CollisionShape2D" parent="ObjectArea"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_liow6")

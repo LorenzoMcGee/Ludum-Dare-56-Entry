@@ -1,6 +1,5 @@
 extends RigidBody2D
 
-var cameraObj
 var playerSpriteAnim2D
 var speed
 
@@ -10,11 +9,12 @@ func _ready() -> void:
 	gravity_scale = 0
 	speed = 4
 	playerSpriteAnim2D = $"CollisionPolygon2D/PlayerSprite"
+	playerSpriteAnim2D.play()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var linVelVec = Vector2.ZERO
 	
 	if(Input.is_action_pressed("UpArrow")):

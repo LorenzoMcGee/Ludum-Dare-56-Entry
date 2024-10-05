@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cblt42d70xbqa"]
+
+[ext_resource type="Texture2D" uid="uid://4038uekaniy8" path="res://Assets/Images/Animations/Creature1/walking/0.png" id="1_grql6"]
+[ext_resource type="Texture2D" uid="uid://c8vkk5gqujb8d" path="res://Assets/Images/Animations/Creature1/walking/1.png" id="2_k78r4"]
+[ext_resource type="Texture2D" uid="uid://cqgc8keffr081" path="res://Assets/Images/Animations/Creature1/walking/2.png" id="3_ibok0"]
+[ext_resource type="Texture2D" uid="uid://g3bansrbu35f" path="res://Assets/Images/Animations/Creature1/walking/3.png" id="4_ylr6x"]
+[ext_resource type="Script" path="res://coal_sprite.gd" id="5_7gfra"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1fgq7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_grql6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k78r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ibok0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ylr6x")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctp48"]
+radius = 89.8462
+height = 179.692
+
+[node name="TinyCreatures" type="Node2D"]
+
+[node name="CoalSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1057, 607)
+scale = Vector2(0.534247, 0.534247)
+sprite_frames = SubResource("SpriteFrames_1fgq7")
+animation = &"walking"
+frame_progress = 0.508163
+script = ExtResource("5_7gfra")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="CoalSprite"]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoalSprite/RigidBody2D"]
+position = Vector2(-1.8717, -3.74365)
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_ctp48")

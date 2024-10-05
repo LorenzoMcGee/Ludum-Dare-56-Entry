@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://n8i1ju6ir2ag"]
+
+[ext_resource type="Texture2D" uid="uid://bwau4ppi1hc2g" path="res://Assets/Images/Animations/Candle/0.png" id="1_tbwvp"]
+[ext_resource type="Texture2D" uid="uid://2vsn3qft7ig7" path="res://Assets/Images/Animations/Candle/1.png" id="2_eeq4a"]
+[ext_resource type="Texture2D" uid="uid://dmc8n2ud82swr" path="res://Assets/Images/Animations/Candle/2.png" id="3_daguq"]
+[ext_resource type="Texture2D" uid="uid://bxfklnxmb661g" path="res://Assets/Images/Animations/Candle/3.png" id="4_et8v7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dep1w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tbwvp")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_eeq4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_daguq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_et8v7")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[node name="Objects" type="Node2D"]
+
+[node name="Candle" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dep1w")
+animation = &"on"
+frame_progress = 0.519459

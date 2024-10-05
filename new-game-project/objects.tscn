@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://n8i1ju6ir2ag"]
+[gd_scene load_steps=7 format=3 uid="uid://n8i1ju6ir2ag"]
 
 [ext_resource type="Texture2D" uid="uid://bwau4ppi1hc2g" path="res://Assets/Images/Animations/Candle/0.png" id="1_tbwvp"]
 [ext_resource type="Texture2D" uid="uid://2vsn3qft7ig7" path="res://Assets/Images/Animations/Candle/1.png" id="2_eeq4a"]
@@ -30,9 +30,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21vfd"]
+size = Vector2(59, 117)
+
 [node name="Objects" type="Node2D"]
 
 [node name="Candle" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dep1w")
-animation = &"on"
-frame_progress = 0.519459
+animation = &"off"
+frame_progress = 0.0170437
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Candle" groups=["Interactible", "RequireFlame"]]
+position = Vector2(-0.5, -6.5)
+shape = SubResource("RectangleShape2D_21vfd")

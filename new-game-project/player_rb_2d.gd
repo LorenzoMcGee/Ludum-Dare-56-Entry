@@ -17,6 +17,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var linVelVec = Vector2.ZERO
 	
+	if(Input.is_action_pressed("Shift")):
+		speed = 7
+	else:
+		speed = 4
+	
 	if(Input.is_action_pressed("UpArrow")):
 		linVelVec += Vector2.UP * 100 * speed
 	elif(Input.is_action_pressed("DownArrow")):

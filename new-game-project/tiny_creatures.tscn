@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cblt42d70xbqa"]
+[gd_scene load_steps=12 format=3 uid="uid://cblt42d70xbqa"]
 
 [ext_resource type="Texture2D" uid="uid://4038uekaniy8" path="res://Assets/Images/Animations/Creature1/walking/0.png" id="1_grql6"]
 [ext_resource type="Script" path="res://coal_sprite_rb_2d.gd" id="1_jonqg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cqgc8keffr081" path="res://Assets/Images/Animations/Creature1/walking/2.png" id="3_ibok0"]
 [ext_resource type="Texture2D" uid="uid://g3bansrbu35f" path="res://Assets/Images/Animations/Creature1/walking/3.png" id="4_ylr6x"]
 [ext_resource type="Texture2D" uid="uid://c5r1brcj100lm" path="res://Assets/Images/E.png" id="8_7y13w"]
+[ext_resource type="Texture2D" uid="uid://b6xlbx6gpsgym" path="res://Assets/Images/space.png" id="9_gwxh7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ctp48"]
 radius = 89.846
@@ -54,7 +55,7 @@ script = ExtResource("1_jonqg")
 position = Vector2(-0.000135183, -9.03606e-05)
 shape = SubResource("CapsuleShape2D_ctp48")
 
-[node name="CoalSprite" type="AnimatedSprite2D" parent="CoalSpriteRB2D/CollisionShape2D"]
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="CoalSpriteRB2D/CollisionShape2D"]
 scale = Vector2(0.991988, 0.991987)
 sprite_frames = SubResource("SpriteFrames_1fgq7")
 animation = &"walking"
@@ -66,5 +67,8 @@ position = Vector2(1.87179, -110.436)
 scale = Vector2(0.538996, 0.538996)
 texture = ExtResource("8_7y13w")
 
-[node name="InformationNode" type="Node2D" parent="CoalSpriteRB2D"]
+[node name="SpacePrompt" type="Sprite2D" parent="CoalSpriteRB2D"]
 visible = false
+position = Vector2(0, -114.179)
+scale = Vector2(0.308494, 0.308494)
+texture = ExtResource("9_gwxh7")

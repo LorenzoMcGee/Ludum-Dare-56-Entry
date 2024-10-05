@@ -8,7 +8,7 @@ var leftDistance
 var grabbed = false
 
 var walking = true
-var CoalSpriteAnim2D
+var Anim2D
 var CollShape2D
 var toggleDirection = false
 var Eprompt
@@ -32,18 +32,18 @@ func closeNuffVecs(inpVec,compVec,threshold):
 func _ready() -> void:
 	rightDistance = 300
 	leftDistance = 200
-	spawnPoint = position
-	CoalSpriteAnim2D = $"CollisionShape2D/CoalSprite"
+	spawnPoint = global_position
+	Anim2D = $"CollisionShape2D/AnimatedSprite"
 	CollShape2D = $"CollisionShape2D"
 	Eprompt = $"EPrompt"
-	CoalSpriteAnim2D.play()
+	Anim2D.play()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	#check if grounded
-	var grounded = closeNuff(linear_velocity.y,0,0.05)
+	var grounded = closeNuff(linear_velocity.y,0,0.05) and closeNuff(global_position.y,spawnPoint.y,100)
 	#check if grabbable
 	grabbable = Eprompt.visible
 	
@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	if(grabbable && Input.is_action_just_pressed("EKey")):
 		grabbed = true
 		playerPos = Vector2.ZERO
-		CoalSpriteAnim2D.animation = &"falling"
+		Anim2D.animation = &"falling"
 		
 	if(Input.is_action_just_pressed("LeftArrow")):
 		negator = -1
@@ -71,14 +71,14 @@ func _physics_process(delta: float) -> void:
 			angular_velocity = 0
 			if(grounded):
 				#walking code
-				if((position.x < spawnPoint.x - leftDistance and !toggleDirection) or (position.x > spawnPoint.x + rightDistance and toggleDirection)):
+				if((global_position.x < spawnPoint.x - leftDistance and !toggleDirection) or (global_position.x > spawnPoint.x + rightDistance and toggleDirection)):
 					toggleDirection = !toggleDirection
 				if(!toggleDirection):
 					velocity = Vector2.LEFT * multiplier 
-					CoalSpriteAnim2D.flip_h = false
+					Anim2D.flip_h = false
 				else:
 					velocity = Vector2.RIGHT * multiplier 
-					CoalSpriteAnim2D.flip_h = true
+					Anim2D.flip_h = true
 				linear_velocity = velocity
 		#could also act as a projectile
 		elif(projectile):
@@ -87,14 +87,12 @@ func _physics_process(delta: float) -> void:
 			if(closeNuff(angular_velocity,0,0.2) and grounded):
 				walking = true
 				projectile = false
-				CoalSpriteAnim2D.  animation = &"walking"
+				Anim2D.  animation = &"walking"
 				linear_velocity = Vector2.UP*multiplier*2   
 				lock_rotation = true
 				rotation = 0
 				angular_velocity = 0
-			
-	else:
-		global_position = playerPos
+		
 				
 		
 			
@@ -102,7 +100,8 @@ func _physics_process(delta: float) -> void:
 	
 	#checks if it falls out of the world
 	if(position.y > spawnPoint.y + 300 ):
-		position = spawnPoint
+		print("Resetting position to spawn: ", position)  # Debugging
+		global_position = spawnPoint
 	
 	
 	

@@ -6,6 +6,7 @@ var velocity
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	play()
+	print ("hello world")
 	pass # Replace with function body.
 
 

@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 var toggleDirection = 1
 var multiplier = 140
 var velocity
+var animationIndex = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,16 +13,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	match animationIndex:
+		0:
+			if(position.x < 200 or position.x > 1057):
+				toggleDirection *= -1
+			if(toggleDirection == 1):
+				velocity = Vector2.LEFT * multiplier * delta
+				flip_h = false
+			else:
+				velocity = Vector2.RIGHT * multiplier * delta 
+				flip_h = true
+		_:
+			pass
 	
-	if(position.x < 200 or position.x > 1057):
-		toggleDirection *= -1
 	
-	if(toggleDirection == 1):
-		velocity = Vector2.LEFT * multiplier * delta
-		flip_h = false
-	else:
-		velocity = Vector2.RIGHT * multiplier * delta 
-		flip_h = true
 	
 	
 	

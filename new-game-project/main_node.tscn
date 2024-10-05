@@ -48,7 +48,7 @@ sources/1 = SubResource("TileSetAtlasSource_h1kgn")
 sources/2 = SubResource("TileSetAtlasSource_wokrc")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k147x"]
-size = Vector2(1168, 20)
+size = Vector2(1610, 20)
 
 [node name="MainNode" type="Node2D"]
 script = ExtResource("1_gteso")
@@ -62,10 +62,10 @@ metadata/_edit_lock_ = true
 offset = Vector2(576, 324)
 
 [node name="TinyCreatures" parent="." instance=ExtResource("4_gki8k")]
-position = Vector2(-1007, -12)
+position = Vector2(-566, -11)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Ground" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(579, 659)
+position = Vector2(426, 659)
 shape = SubResource("RectangleShape2D_k147x")

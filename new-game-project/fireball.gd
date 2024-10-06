@@ -16,9 +16,9 @@ func _process(delta: float) -> void:
 	if position.y < -100 or position.y > 1000:  # Example of destroying when out of bounds
 		queue_free()
 
-func set_direction(new_direction: Vector2):
+func set_direction(new_direction: Vector2,i):
 	direction = new_direction
-	rotation = atan(direction.y/direction.x)
+	rotation = -(2*PI/8)*i
 
 
 	

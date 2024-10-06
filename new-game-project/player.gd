@@ -26,7 +26,7 @@ func _ready() -> void:
 func fire_fireball(direction):
 	for i in (8):
 		var projectile = FireballScene.instantiate()  # Instance a new projectile
-		projectile.set_direction(Vector2.RIGHT*cos((2*PI/8)*i)+Vector2.UP*sin((2*PI/8)*i))
+		projectile.set_direction(Vector2.RIGHT*cos((2*PI/8)*i)+Vector2.UP*sin((2*PI/8)*i),i)
 		projectile.position = SpriteRB.global_position
 		projectile.visible = true
 		get_parent().add_child(projectile) 

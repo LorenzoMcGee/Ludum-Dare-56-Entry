@@ -20,9 +20,6 @@ func set_direction(new_direction: Vector2):
 	direction = new_direction
 	rotation = atan(direction.y/direction.x)
 
-func _on_body_entered(body):
-	#print("Body entered: ", body.name)  # Debugging line
-	if not body.is_in_group("TinyCreatures"):  # You can assign NPCs to a group
-		queue_free()
+
 	
 		

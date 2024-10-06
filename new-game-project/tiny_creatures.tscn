@@ -59,7 +59,7 @@ shape = SubResource("CapsuleShape2D_ctp48")
 scale = Vector2(0.991988, 0.991987)
 sprite_frames = SubResource("SpriteFrames_1fgq7")
 animation = &"walking"
-frame_progress = 0.0188138
+frame_progress = 0.866253
 
 [node name="EPrompt" type="Sprite2D" parent="CoalSpriteRB2D"]
 visible = false

@@ -46,7 +46,7 @@ polygon = PackedVector2Array(-19.1093, -18.718, -26.5964, -56.1539, -26.5964, -8
 position = Vector2(-47.455, -13.045)
 scale = Vector2(0.806464, 0.806464)
 sprite_frames = SubResource("SpriteFrames_wvhwq")
-frame_progress = 0.474621
+frame_progress = 0.637509
 
 [node name="Camera2D" type="Camera2D" parent="PlayerRB2D"]
 position = Vector2(-332, -283)

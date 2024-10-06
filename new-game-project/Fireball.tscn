@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwrdbnpaoi8q6"]
+[gd_scene load_steps=9 format=3 uid="uid://dwrdbnpaoi8q6"]
 
 [ext_resource type="Texture2D" uid="uid://cqxs6xer67kx8" path="res://Assets/Images/Animations/fireball/fireball1.png" id="1_xywqu"]
 [ext_resource type="Texture2D" uid="uid://bj0kgbh3rn80w" path="res://Assets/Images/Animations/fireball/fireball2.png" id="2_jonul"]
 [ext_resource type="Texture2D" uid="uid://djio77f5o43pk" path="res://Assets/Images/Animations/fireball/fireball3.png" id="3_g5lhq"]
 [ext_resource type="Texture2D" uid="uid://dgjj8ueoocv1n" path="res://Assets/Images/Animations/fireball/fireball4.png" id="4_pc7nf"]
 [ext_resource type="Script" path="res://fireball.gd" id="5_um4le"]
+[ext_resource type="Script" path="res://area_2d_fireball.gd" id="6_r8xow"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pilmn"]
 animations = [{
@@ -30,13 +31,16 @@ animations = [{
 radius = 56.836
 
 [node name="Power" type="AnimatedSprite2D"]
-visible = false
 position = Vector2(-1.8718, -7.48717)
 scale = Vector2(1.1637, 1.1637)
 sprite_frames = SubResource("SpriteFrames_pilmn")
+frame_progress = 0.248905
 script = ExtResource("5_um4le")
 
-[node name="PowerCollisionShape" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("6_r8xow")
+
+[node name="PowerCollisionShape" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1.6085, 6.43396)
 scale = Vector2(0.859331, 0.859331)
 shape = SubResource("CircleShape2D_ymaxf")

@@ -44,7 +44,7 @@ func _on_body_entered(body):
 
 # Signal handler for when a body exits the Area2D
 func _on_body_exited(body):
-	if body.is_in_group("TinyCreatures"):
+	if body.is_in_group("TinyCreatures") && body.is_in_group:
 		#print("A tiny creature has left reach!")
 		var epromptSprite = body.get_node("EPrompt")
 		epromptSprite.visible = false

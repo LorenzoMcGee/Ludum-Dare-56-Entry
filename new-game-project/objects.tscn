@@ -35,11 +35,11 @@ size = Vector2(59, 117)
 
 [node name="Objects" type="Node2D"]
 
-[node name="Candle" type="AnimatedSprite2D" parent="."]
+[node name="Candle" type="AnimatedSprite2D" parent="." groups=["Interactible", "RequireFlame"]]
 sprite_frames = SubResource("SpriteFrames_dep1w")
 animation = &"off"
-frame_progress = 0.389649
+frame_progress = 0.603098
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Candle" groups=["Interactible", "RequireFlame"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Candle"]
 position = Vector2(-0.5, -6.5)
 shape = SubResource("RectangleShape2D_21vfd")

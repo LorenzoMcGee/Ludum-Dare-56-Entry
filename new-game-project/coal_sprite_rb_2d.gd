@@ -87,14 +87,15 @@ func _physics_process(delta: float) -> void:
 			if(closeNuff(angular_velocity,0,0.2) and grounded):
 				walking = true
 				projectile = false
-				Anim2D.  animation = &"walking"
+				Anim2D.animation = &"walking"
 				linear_velocity = Vector2.UP*multiplier*2   
 				lock_rotation = true
 				rotation = 0
 				angular_velocity = 0
 		
-				
-		
+	#if it's falling, spawn particles
+	if (not grounded):
+		pass
 			
 		
 	

@@ -6,6 +6,9 @@ var playerSprite
 var my_array = []
 var SpriteRB
 
+var FireballScene
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,16 +16,27 @@ func _ready() -> void:
 	rb2d = $"PlayerRB2D"
 	playerSprite = $"PlayerRB2D/CollisionPolygon2D/PlayerSprite"
 
+	FireballScene = preload("res://Fireball.tscn")
+	
 	print(proximity_detector)
 	proximity_detector.connect("body_entered", Callable(self, "_on_body_entered"))
 	proximity_detector.connect("body_exited", Callable(self, "_on_body_exited"))
 	pass # Replace with function body.
 
+func fire_fireball(direction):
+	for i in (8):
+		var projectile = FireballScene.instantiate()  # Instance a new projectile
+		projectile.set_direction(Vector2.RIGHT*cos((2*PI/8)*i)+Vector2.UP*sin((2*PI/8)*i))
+		projectile.position = SpriteRB.global_position
+		projectile.visible = true
+		get_parent().add_child(projectile) 
+		projectile.play()  # Play the appropriate animation based on direction
+
 # Signal handler for when a body enters the Area2D
 func _on_body_entered(body):
-	print("Body entered: ", body.name)  # Debugging line
+	#print("Body entered: ", body.name)  # Debugging line
 	if body.is_in_group("TinyCreatures"):  # You can assign NPCs to a group
-		print("A tiny creature is within reach!")
+		#print("A tiny creature is within reach!")
 		var epromptSprite = body.get_node("EPrompt")
 		epromptSprite.visible = true
 		my_array.append(body)
@@ -31,7 +45,7 @@ func _on_body_entered(body):
 # Signal handler for when a body exits the Area2D
 func _on_body_exited(body):
 	if body.is_in_group("TinyCreatures"):
-		print("A tiny creature has left reach!")
+		#print("A tiny creature has left reach!")
 		var epromptSprite = body.get_node("EPrompt")
 		epromptSprite.visible = false
 		my_array.remove_at(my_array.size()-1)
@@ -45,16 +59,19 @@ func _process(delta: float) -> void:
 		if($PlayerRB2D/CollisionPolygon2D/PlayerSprite.flip_h):
 			inverter *= -1
 		SpriteRB.linear_velocity = (Vector2.RIGHT*SpriteRB.multiplier*3.0*inverter)+(Vector2.UP*SpriteRB.multiplier*3.0)
-		print("Throwing with velocity: ", SpriteRB.linear_velocity)  # Add this line to debug
+		
+		#print("Throwing with velocity: ", SpriteRB.linear_velocity)  # Add this line to debug
 		SpriteRB.walking = false
 		SpriteRB.projectile = true
-		SpriteRB.Anim2D.animation = &"falling"
 		SpriteRB.projectile = true
 		SpriteRB.grabbed = false
 		SpriteRB.grabbable = false
 		grabbing = false
 		proximity_detector.monitoring = true
+		SpriteRB.Anim2D.animation = &"falling"
 		SpriteRB.get_node("SpacePrompt").visible = false
+		fire_fireball(Vector2.UP)
+		SpriteRB.global_position = SpriteRB.playerPos  # Update the position here
 		SpriteRB = null
 	
 	if(!grabbing and Input.is_action_just_pressed("EKey")):
@@ -63,6 +80,7 @@ func _process(delta: float) -> void:
 			proximity_detector.monitoring = false
 			grabbing = true
 			SpriteRB.get_node("SpacePrompt").visible = true
+			
 		else:
 			SpriteRB = null
 		
@@ -77,10 +95,10 @@ func _process(delta: float) -> void:
 		SpriteRB.playerPos = rb2d.global_position + Vector2.UP * 50 + (Vector2.RIGHT * 200 * inverter)
 		SpriteRB.global_position = SpriteRB.playerPos  # Update the position here
 		
-	if grabbing:
-		print("While grabbing - Object Y position: ", SpriteRB.global_position.y,":",rb2d.global_position+Vector2.UP*50+(Vector2.RIGHT*200*1))
-	elif(SpriteRB != null):
-		print("After throwing - Object Y position: ", SpriteRB.global_position.y)
+	#if grabbing:
+		#print("While grabbing - Object Y position: ", SpriteRB.global_position.y,":",rb2d.global_position+Vector2.UP*50+(Vector2.RIGHT*200*1))
+	#elif(SpriteRB != null):
+		#print("After throwing - Object Y position: ", SpriteRB.global_position.y)
 		
 	#if(SpriteRB != null):
 		#print(SpriteRB.playerPos," ",$PlayerRB2D.global_position)

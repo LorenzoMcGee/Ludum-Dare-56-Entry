@@ -25,7 +25,7 @@ func _process(delta):
 
 		if distance_to_player < detection_radius:
 			# Chase the player if within detection range
-			var direction = (player.position - position).normalized()
+			var direction = (player.global_position - global_position).normalized()
 			move_velocity = direction * speed
 		else:
 			# Optional wandering behavior (random movement)

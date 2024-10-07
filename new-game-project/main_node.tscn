@@ -87,9 +87,9 @@ tile_set = SubResource("TileSet_4mpc2")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
-offset_left = -274.0
+offset_left = -891.0
 offset_top = -600.0
-offset_right = 2749.0
+offset_right = 2132.0
 offset_bottom = 723.0
 texture = ExtResource("2_jbskf")
 

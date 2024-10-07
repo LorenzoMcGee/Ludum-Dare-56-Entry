@@ -9,6 +9,3 @@ offset_top = 4.0
 offset_right = 1295.0
 offset_bottom = 726.0
 texture = ExtResource("1_efmvh")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(642, 364)

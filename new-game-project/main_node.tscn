@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://sxat76cbxd4i"]
+[gd_scene load_steps=24 format=4 uid="uid://sxat76cbxd4i"]
 
 [ext_resource type="Texture2D" uid="uid://ljapgkvoambx" path="res://Assets/Images/Tiles/dirtTile.png" id="1_bpamy"]
 [ext_resource type="Script" path="res://main_node.gd" id="1_gteso"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b618c0duu4h6k" path="res://Assets/Images/Animations/Door/door2.png" id="11_5elst"]
 [ext_resource type="Texture2D" uid="uid://1qegjhinhggp" path="res://Assets/Images/Animations/Door/door3.png" id="12_8d8kg"]
 [ext_resource type="Texture2D" uid="uid://bbd8rlrh73o5n" path="res://Assets/Images/Animations/Door/door4.png" id="13_hab23"]
+[ext_resource type="PackedScene" uid="uid://dkl0gakjqfmmm" path="res://ending.tscn" id="14_pniyy"]
 [ext_resource type="Texture2D" uid="uid://cxkc3gn8xm7sb" path="res://Assets/Images/Animations/Door/door5.png" id="14_prie1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_akm6y"]
@@ -149,7 +150,6 @@ shape = SubResource("RectangleShape2D_qhpye")
 
 [node name="Objects" parent="." instance=ExtResource("7_3pds6")]
 position = Vector2(1532, 606)
-scale = Vector2(1, 1)
 
 [node name="Player" parent="." instance=ExtResource("5_x8x31")]
 position = Vector2(171, 371)
@@ -202,15 +202,16 @@ shape = SubResource("RectangleShape2D_dunod")
 
 [node name="Door" type="AnimatedSprite2D" parent="StaticBody2D2/MainDoorCollide" groups=["Door"]]
 position = Vector2(0.268188, -0.80447)
-scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_886rq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2/MainDoorCollide"]
 position = Vector2(-0.9776, -167.101)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_s2sy1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2/MainDoorCollide"]
 position = Vector2(0.268188, 131.377)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_s2sy1")
+
+[node name="Ending" parent="StaticBody2D2" groups=["Ending"] instance=ExtResource("14_pniyy")]
+visible = false
+position = Vector2(2653, -312)

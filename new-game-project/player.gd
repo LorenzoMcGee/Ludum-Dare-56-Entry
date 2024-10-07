@@ -8,13 +8,15 @@ var SpriteRB
 var DoorObj
 var FireballScene
 var simultaneous_scene
-
+var playerGone = false
+var endingScreen
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	proximity_detector = $"ObjectArea"
 	rb2d = $"PlayerRB2D"
 	playerSprite = $"PlayerRB2D/CollisionPolygon2D/PlayerSprite"
+	endingScreen = get_tree().get_nodes_in_group("Ending")[0]
 	DoorObj = get_tree().get_nodes_in_group("Door")[0]
 
 	FireballScene = preload("res://Fireball.tscn")
@@ -65,11 +67,18 @@ func _process(delta: float) -> void:
 	var doorGlobalPos = DoorObj.global_position
 	doorGlobalPos.x += 300
 	
-	print(doorGlobalPos.x,":",rb2d.global_position.x)
+	#print(doorGlobalPos.x,":",rb2d.global_position.x)
 	
-	if(closeNuff(doorGlobalPos.x,rb2d.global_position.x,40)):
-		get_tree().root.add_child(simultaneous_scene)
-		get_node("/root/MainNode").visible = false
+	if(not playerGone and closeNuff(doorGlobalPos.x,rb2d.global_position.x,40)):
+		#get_tree().root.add_child(simultaneous_scene)
+		visible = false
+		rb2d.global_position = Vector2.RIGHT*2985+Vector2.DOWN*(-26)
+		playerGone = true
+		rb2d.playerGone = true
+		endingScreen.visible = true
+		
+	#print(rb2d.global_position)
+	
 	
 	proximity_detector.position = rb2d.position
 	

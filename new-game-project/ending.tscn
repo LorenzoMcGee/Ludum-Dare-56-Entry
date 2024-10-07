@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkl0gakjqfmmm"]
+
+[ext_resource type="Texture2D" uid="uid://bripv3qaae1rf" path="res://Assets/Images/Tiles/Night Background.png" id="1_efmvh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = 4.0
+offset_right = 1295.0
+offset_bottom = 726.0
+texture = ExtResource("1_efmvh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(642, 364)

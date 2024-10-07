@@ -5,9 +5,9 @@ var grabbing = false
 var playerSprite
 var my_array = []
 var SpriteRB
-
+var DoorObj
 var FireballScene
-
+var simultaneous_scene
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,15 +15,21 @@ func _ready() -> void:
 	proximity_detector = $"ObjectArea"
 	rb2d = $"PlayerRB2D"
 	playerSprite = $"PlayerRB2D/CollisionPolygon2D/PlayerSprite"
+	DoorObj = get_tree().get_nodes_in_group("Door")[0]
 
 	FireballScene = preload("res://Fireball.tscn")
-	
+	simultaneous_scene = preload("res://ending.tscn").instantiate()
 	print(proximity_detector)
 	proximity_detector.connect("body_entered", Callable(self, "_on_body_entered"))
 	proximity_detector.connect("body_exited", Callable(self, "_on_body_exited"))
 	pass # Replace with function body.
 
 func fire_fireball(direction):
+	var existingArray = get_tree().get_nodes_in_group("Power")
+	
+	for i in (existingArray.size()):
+		existingArray[i].queue_free()
+	
 	for i in (8):
 		var projectile = FireballScene.instantiate()  # Instance a new projectile
 		projectile.set_direction(Vector2.RIGHT*cos((2*PI/8)*i)+Vector2.UP*sin((2*PI/8)*i),i)
@@ -31,6 +37,10 @@ func fire_fireball(direction):
 		projectile.visible = true
 		get_parent().add_child(projectile) 
 		projectile.play()  # Play the appropriate animation based on direction
+
+func closeNuff(inp,comp,threshold):
+	return abs(inp-comp) < threshold
+
 
 # Signal handler for when a body enters the Area2D
 func _on_body_entered(body):
@@ -52,6 +62,15 @@ func _on_body_exited(body):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var doorGlobalPos = DoorObj.global_position
+	doorGlobalPos.x += 300
+	
+	print(doorGlobalPos.x,":",rb2d.global_position.x)
+	
+	if(closeNuff(doorGlobalPos.x,rb2d.global_position.x,40)):
+		get_tree().root.add_child(simultaneous_scene)
+		get_node("/root/MainNode").visible = false
+	
 	proximity_detector.position = rb2d.position
 	
 	if(grabbing and Input.is_action_just_pressed("Space")):

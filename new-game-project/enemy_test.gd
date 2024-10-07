@@ -7,6 +7,8 @@ extends CharacterBody2D
 var move_velocity = Vector2.ZERO  # The velocity of the enemy
 var player : Node2D = null  # This will store the player reference
 var animationSprite
+var timeCount
+var counter
 
 func _ready():
 	# Look for the player in the scene tree when the enemy is ready
@@ -14,12 +16,28 @@ func _ready():
 	player = get_parent().get_node_or_null("Player")
 	animationSprite = $AnimatedSprite2D
 	animationSprite.play()
+	counter = 1
+	timeCount = 0
 	
 	# Set up the collision shape (adjust according to your enemy's size)
 	var collision_shape = $CollisionShape2D.shape
-	collision_shape.radius = 20  # Example radius for circle shape
+	#collision_shape. # Example radius for circle shape
 
 func _process(delta):
+	if timeCount >= 1:
+		timeCount = 0
+		if counter > 0:
+			counter = 0
+			global_position.y += 64
+		else:
+			global_position.y -= 64
+			counter += 1
+	else:
+		timeCount+=delta
+	
+	
+	
+	"""
 	if player and is_instance_valid(player):
 		var distance_to_player = position.distance_to(player.position)
 
@@ -35,6 +53,7 @@ func _process(delta):
 
 	# Move the enemy using the updated velocity
 	move_and_collide(move_velocity * delta)
+	"""
 
 # Optional wandering logic
 func wander_around():

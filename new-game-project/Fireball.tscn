@@ -30,7 +30,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ymaxf"]
 radius = 56.836
 
-[node name="Power" type="AnimatedSprite2D"]
+[node name="Power" type="AnimatedSprite2D" groups=["Power"]]
 position = Vector2(-1.8718, -7.48717)
 scale = Vector2(1.1637, 1.1637)
 sprite_frames = SubResource("SpriteFrames_pilmn")

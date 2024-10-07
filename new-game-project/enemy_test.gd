@@ -3,13 +3,17 @@ extends CharacterBody2D
 @export var speed = 100  # Speed at which the enemy moves
 @export var detection_radius = 300  # How close the player has to be for the enemy to chase
 
+
 var move_velocity = Vector2.ZERO  # The velocity of the enemy
 var player : Node2D = null  # This will store the player reference
+var animationSprite
 
 func _ready():
 	# Look for the player in the scene tree when the enemy is ready
 	# Assuming the player is called "Player" and exists in the same scene
 	player = get_parent().get_node_or_null("Player")
+	animationSprite = $AnimatedSprite2D
+	animationSprite.play()
 	
 	# Set up the collision shape (adjust according to your enemy's size)
 	var collision_shape = $CollisionShape2D.shape

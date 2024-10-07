@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://oe8es1481cxj" path="res://Assets/Images/Tiles/darkness.png" id="4_nwlup"]
 [ext_resource type="PackedScene" uid="uid://duhntt1tgj1nt" path="res://player.tscn" id="5_x8x31"]
 [ext_resource type="PackedScene" uid="uid://n8i1ju6ir2ag" path="res://objects.tscn" id="7_3pds6"]
-[ext_resource type="PackedScene" uid="uid://dmh1vt3wt8f2a" path="res://enemy.tscn" id="9_r0vq3"]
+[ext_resource type="PackedScene" uid="uid://dvy8ae7ydyo4p" path="res://enemy.tscn" id="9_r0vq3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_akm6y"]
 texture = ExtResource("2_fwb7y")

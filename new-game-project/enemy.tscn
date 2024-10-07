@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmh1vt3wt8f2a"]
+[gd_scene load_steps=6 format=3 uid="uid://dvy8ae7ydyo4p"]
 
 [ext_resource type="Script" path="res://enemy_test.gd" id="1_p8q5u"]
 [ext_resource type="Texture2D" uid="uid://82421hfdn7mb" path="res://Assets/Images/Animations/Bat/Bat 1.png" id="2_emgh2"]
@@ -23,14 +23,15 @@ radius = 14.0
 height = 56.0
 
 [node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(3.235, 3.235)
 script = ExtResource("1_p8q5u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(24, 2)
-scale = Vector2(8.43317, 6.55823)
+position = Vector2(3, 9)
+scale = Vector2(0.729024, 0.566941)
 sprite_frames = SubResource("SpriteFrames_vpm5i")
 animation = &"Fly"
-frame_progress = 0.438492
+frame_progress = 0.0862823
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 9)
